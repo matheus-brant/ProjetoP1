@@ -52,6 +52,8 @@ def criptografarUsuarios(dicionario):
         arquivo.write(criptografarString(dicionario[nome][1]))
         arquivo.write('\n')
         arquivo.write(criptografarString(str(dicionario[nome][2])))
+        arquivo.write('\n')
+        arquivo.write(criptografarString(str(int(dicionario[nome][3]))))
         arquivo.write('\n\n')
     arquivo.close()
 
@@ -67,5 +69,40 @@ def decifrarUsuarios(dicionario):
         linha = arquivo.readline()
         acesso = int(decifrarString(linha))
         linha = arquivo.readline()
-        dicionario[email] = (nome, senha, acesso)
+        sit = bool(int(decifrarString(linha)))
         linha = arquivo.readline()
+        dicionario[email] = (nome, senha, acesso, sit)
+        linha = arquivo.readline()
+        
+def criptografarElementos(cardapio):
+    arquivo = open('elementos.txt', 'w')
+    for nome in cardapio:
+        arquivo.write(criptografarString(nome))
+        arquivo.write('\n')
+        arquivo.write(criptografarString(cardapio[nome][0]))
+        arquivo.write('\n')
+        arquivo.write(criptografarString(str(cardapio[nome][1])))
+        arquivo.write('\n')
+        arquivo.write(criptografarString(str(int(cardapio[nome][2]))))
+        arquivo.write('\n')
+        arquivo.write(criptografarString(str(cardapio[nome][3])))
+        arquivo.write('\n\n')
+    arquivo.close()
+    
+def decifrarElementos(cardapio):
+    arquivo = open('elementos.txt', 'r')
+    linha = arquivo.readline()
+    while linha != '':
+        nome = decifrarString(linha)
+        linha = arquivo.readline()
+        desc = decifrarString(linha)
+        linha = arquivo.readline()
+        valor = float(decifrarString(linha))
+        linha = arquivo.readline()
+        sit = bool(int(decifrarString(linha)))
+        linha = arquivo.readline()
+        tip = int(decifrarString(linha))
+        cardapio[nome] = (desc, valor, sit, tip)
+        linha = arquivo.readline()
+        linha = arquivo.readline()
+
