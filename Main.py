@@ -116,6 +116,7 @@ while login == True:
             print("Seu pedido foi cancelado.")
         elif comando == 5:
             if usuarios[email][2] < 2:
+                print("Nível de acesso insuficiente, entre em contato com o Administrador.")
                 continue
             nome =  input ("Informe o nome do produto: ")
             desc = input ("Informe a descrição do produto: ")
@@ -126,6 +127,7 @@ while login == True:
             print("Produto cadastrado com sucesso!")
         elif comando == 6:
             if usuarios[email][2] < 2:
+                print("Nível de acesso insuficiente, entre em contato com o Administrador.")
                 continue
             print("n1 - Ativar produto")
             print("n2 - Desativar produto")
@@ -192,6 +194,7 @@ while login == True:
             arquivo.close()
         elif comando == 8:
             if usuarios[email][2] < 3:
+                print("Nível de acesso insuficiente, entre em contato com o Administrador.")
                 continue
             print("n1 - Ativar usuário")
             print("n2 - Desativar usuário")
@@ -292,15 +295,16 @@ while login == True:
             print("Salvo no arquivo {}".format(relatorio))
         elif comando == 11:
             if usuarios[email][2] < 2:
+                print("Nível de acesso insuficiente, entre em contato com o Administrador.")
                 continue
-            nomeUsuario = input("Informe o nome do usuário desejado: ")
-            buscaUsuario = Usuarios.buscaUsuario(usuarios, nomeUsuario)
-            for nome in buscaUsuario:
-                if nomeUsuario != nome:
-                    print("Nome inválido, tente novamente.")
-                    nomeUsuario = input("Informe o nome do usuário desejado: ")
-                    buscaUsuario = Usuarios.buscaUsuario(usuarios, nomeUsuario)
-                print("Usuário pesquisado:\n")
+            pesquisa = input("Informe o nome do usuário desejado: ")
+            buscaUsuario = Usuarios.buscaUsuario(usuarios, pesquisa)
+            if len(buscaUsuario) == 0:
+                print("Nenhum usuário encontrado, tente novamente.")
+            else:
+                print("Usuários encontrados:\n")
+                for nome in buscaUsuario:
+                    print(nome)
         elif comando == 12:
             precoMaximo = float(input("Informe o valor máximo do produto desejado: "))
             buscaProduto = Elementos.buscaProdutos(cardapio, precoMaximo)

@@ -10,7 +10,7 @@ def buscaUsuario(usuarios, nome):
     resultados = []
     for n in usuarios:
         if usuarios[n][0] == nome:
-            resultados.append(nome)
+            resultados.append(n)
     resultados.sort()
     return resultados
 
