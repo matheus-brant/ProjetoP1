@@ -6,8 +6,27 @@ Created on Sat Jun  9 15:49:16 2018
 """
 import datetime
 
-def buscaUsuario(parametros):
-    pass
+def buscaUsuario(usuarios, nome):
+    resultados = []
+    for nome in usuarios:
+        if usuarios[nome][0] <= nome:
+            resultados.append(nome)
+    resultados.sort()
+    return resultados
+
+def usuariosAtivos(dicionario):
+    ativos = []
+    for usuario in dicionario:
+        if dicionario[usuario][3] == True:
+            ativos.append(usuario)
+    return ativos
+
+def usuariosInativos(dicionario):
+    inativos = []
+    for usuario in dicionario:
+        if dicionario[usuario][3] == False:
+            inativos.append(usuario)
+    return inativos
 
 def logAct(usuario, acao):
     arquivo = open('log.txt', 'a')

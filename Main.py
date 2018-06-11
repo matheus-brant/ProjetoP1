@@ -9,7 +9,7 @@ import Criptografia
 import Pedidos
 import datetime
 import Elementos
-#dicionario de usuários[e-mail] = (nome, senha, nível de acesso)
+#dicionario de usuários[e-mail] = (nome, senha, nível de acesso, atividade)
 
 usuarios = dict()
 usuarios['adm'] = ('Administrador', 'adm', 3, True)
@@ -65,7 +65,7 @@ while login == True:
     print("n8 - Atualizar ou desativar usuário (3)")
     print("n9 - Relatório de usuários")
     print("n10 - Confirmar Pedido")
-    print("n11 - Pesquisar usuario por nome")
+    print("n11 - Pesquisar usuario por nome (2)")
     print("n12 - Pesquisar produto por preço")
     print("n0 - Sair")
     comando = 1
@@ -123,6 +123,8 @@ while login == True:
             cardapio[nome] = (desc, valor, True, tipo)
             print("Produto cadastrado com sucesso!")
         elif comando == 6:
+            if usuarios[email][2] < 2:
+                continue
             print("n1 - Ativar produto")
             print("n2 - Desativar produto")
             print("n3 - Alterar Descrição")
@@ -187,9 +189,81 @@ while login == True:
                 arquivo.write('Produto: '+nome+' '+'R$'+str(valor)+'\n')
             arquivo.close()
         elif comando == 8:
-            pass
+            if usuarios[email][2] < 3:
+                continue
+            print("n1 - Ativar usuário")
+            print("n2 - Desativar usuário")
+            print("n3 - Alterar Nome")
+            print("n4 - Alterar Senha")
+            print("n5 - Alterar Nível de Acesso")
+            print("n0 - Sair")
+            opcao = int(input("Ação: "))
+            if opcao == 1:
+                inativos = Usuarios.usariosInativos(usuarios)
+                cont = 1
+                for nome in usuarios:
+                    print("n{} - {}".format(cont, nome))
+                    cont += 1
+                print('n0 - sair')
+                nome = int(input("Escolha o usuário: "))
+                if nome == 0:
+                    continue
+                elif nome >0 and nome >len(inativos):
+                    usuarioInativo = inativos[nome - 1]
+                    usuarios[e-mail] = (usuarios[nome][0], usuarios[nome][1], usuarios[nome][2], True)
+                else:
+                    print("Usuário inválido, tente novamente.")
+            elif opcao == 2:
+                ativos = Usuarios.usuariosAtivos(usuarios)
+                cont = 1
+                for nome in usuarios:
+                    print("n{} - {}".format(cont, nome))
+                    cont += 1
+                print('n0 - sair')
+                nome = int(input("Escolha o usuário: "))
+                if nome == 0:
+                    continue
+                elif nome >0 and nome >len(ativos):
+                    usuarioAtivo = ativos[nome - 1]
+                    usuarios[e-mail] = (usuarios[nome][0], usuarios[nome][1], usuarios[nome][2, False])
+            elif opcao == 3:
+                nome = input("Informe o usuário: ")
+                if not e-mail in usuarios:
+                    print("Usuário inválido, tente novamente.")
+                else:
+                    novoNome = input("Informe o novo nome: ")
+                    usuarios[e-mail] = (novoNome, usuarios[nome][1], usuarios[nome][2], usuarios[nome][3])
+            elif opcao == 4:
+                nome = input("Informe o usuário: ")
+                if not e-mail in usuarios:
+                    print("Usuário inválido, tente novamente.")
+                else:
+                    novaSenha = input("Informe a nova senha: ")
+                    usuarios[e-mail] = (usuarios[nome][0], novaSenha, usuarios[nome][2], usuarios[nome][3])
+            elif opcao == 5:
+                nome = input("Informe o usuário: ")
+                if not e-mail in usuarios:
+                    print("Usuário inválido, tente novamente.")
+                else:
+                    novoNivelAcesso = input("Informe o novo nível de acesso: ")
+                    usuarios[e-mail] = (usuarios[nome][0], usuarios[nome][1], novoNivelAcesso, usuarios[nome][3])
+            elif opcao == 0:
+                continue
+            '''
         elif comando == 9:
-            pass
+            ativos = Usuarios.usuariosAtivos(usuarios)
+            ativos.sort()
+            arquivo = open('Relatório - Usuários Ativos.txt', 'w')
+            for nome in ativos:
+                arquivo.write('Usuário: '+nome+' '+'Nível de Acesso: '++'\n')
+            arquivo.close()
+            inativos = Usuarios.usuariosInativos(usuarios)
+            inativos.sort()
+            arquivo = open('Relatório - Usuários Inativos.txt', 'w')
+            for nome in inativos:
+                arquivo.write('Usuário: '+nome+' '+'Nível de Acesso: '++'\n')
+            arquivo.close()
+            '''
         elif comando == 10:
             if len(pedido) == 0:
                 print("Quantidade de produtos insuficiente.")
@@ -222,4 +296,9 @@ while login == True:
             login = False 
         else:
             print("Erro! Tente novamente.")
-        
+        elif comando == 11:
+            if usuarios[email][2] < 2:
+                continue
+            pass
+        elif comando == 12:
+            pass
