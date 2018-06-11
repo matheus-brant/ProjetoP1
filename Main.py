@@ -9,6 +9,8 @@ import Criptografia
 import Pedidos
 import datetime
 import Elementos
+import Usuarios
+
 #dicionario de usuários[e-mail] = (nome, senha, nível de acesso, atividade)
 
 usuarios = dict()
@@ -141,7 +143,7 @@ while login == True:
                 produto = int(input("Escolha o produto: "))
                 if produto == 0:
                     continue
-                elif produto >0 and produto >len(inativos):
+                elif produto >0 and produto <=len(inativos):
                     nome = inativos[produto - 1]
                     cardapio[nome] = (cardapio[nome][0], cardapio[nome][1], True, cardapio[nome][3])
                 else:
@@ -156,7 +158,7 @@ while login == True:
                 produto = int(input("Escolha o produto: "))
                 if produto == 0:
                     continue
-                elif produto >0 and produto >len(ativos):
+                elif produto >0 and produto <=len(ativos):
                     nome = ativos[produto - 1]
                     cardapio[nome] = (cardapio[nome][0], cardapio[nome][1], False, cardapio[nome][3])
             elif opcao == 3:
@@ -208,9 +210,9 @@ while login == True:
                 nome = int(input("Escolha o usuário: "))
                 if nome == 0:
                     continue
-                elif nome >0 and nome >len(inativos):
+                elif nome >0 and nome <= len(inativos):
                     usuarioInativo = inativos[nome - 1]
-                    usuarios[e-mail] = (usuarios[nome][0], usuarios[nome][1], usuarios[nome][2], True)
+                    usuarios[usuarioInativo] = (usuarios[usuarioInativo][0], usuarios[usuarioInativo][1], usuarios[usuarioInativo][2], True)
                 else:
                     print("Usuário inválido, tente novamente.")
             elif opcao == 2:
@@ -223,47 +225,45 @@ while login == True:
                 nome = int(input("Escolha o usuário: "))
                 if nome == 0:
                     continue
-                elif nome >0 and nome >len(ativos):
+                elif nome >0 and nome <= len(ativos):
                     usuarioAtivo = ativos[nome - 1]
-                    usuarios[e-mail] = (usuarios[nome][0], usuarios[nome][1], usuarios[nome][2, False])
+                    usuarios[usuarioAtivo] = (usuarios[usuarioAtivo][0], usuarios[usuarioAtivo][1], usuarios[usuarioAtivo][2, False])
             elif opcao == 3:
-                nome = input("Informe o usuário: ")
-                if not e-mail in usuarios:
+                usr = input("Informe o e-mail do usuário: ")
+                if not usr in usuarios:
                     print("Usuário inválido, tente novamente.")
                 else:
                     novoNome = input("Informe o novo nome: ")
-                    usuarios[e-mail] = (novoNome, usuarios[nome][1], usuarios[nome][2], usuarios[nome][3])
+                    usuarios[usr] = (novoNome, usuarios[usr][1], usuarios[usr][2], usuarios[usr][3])
             elif opcao == 4:
-                nome = input("Informe o usuário: ")
-                if not e-mail in usuarios:
+                usr = input("Informe o e-mail do usuário: ")
+                if not usr in usuarios:
                     print("Usuário inválido, tente novamente.")
                 else:
                     novaSenha = input("Informe a nova senha: ")
-                    usuarios[e-mail] = (usuarios[nome][0], novaSenha, usuarios[nome][2], usuarios[nome][3])
+                    usuarios[usr] = (usuarios[usr][0], novaSenha, usuarios[usr][2], usuarios[usr][3])
             elif opcao == 5:
-                nome = input("Informe o usuário: ")
-                if not e-mail in usuarios:
+                usr = input("Informe o e-mail do usuário: ")
+                if not usr in usuarios:
                     print("Usuário inválido, tente novamente.")
                 else:
                     novoNivelAcesso = input("Informe o novo nível de acesso: ")
-                    usuarios[e-mail] = (usuarios[nome][0], usuarios[nome][1], novoNivelAcesso, usuarios[nome][3])
+                    usuarios[usr] = (usuarios[usr][0], usuarios[usr][1], novoNivelAcesso, usuarios[usr][3])
             elif opcao == 0:
                 continue
-            '''
         elif comando == 9:
             ativos = Usuarios.usuariosAtivos(usuarios)
             ativos.sort()
             arquivo = open('Relatório - Usuários Ativos.txt', 'w')
             for nome in ativos:
-                arquivo.write('Usuário: '+nome+' '+'Nível de Acesso: '++'\n')
+                arquivo.write('Usuário: '+nome+' '+'Nível de Acesso: '+str(usuarios[nome][2])+'\n')
             arquivo.close()
             inativos = Usuarios.usuariosInativos(usuarios)
             inativos.sort()
             arquivo = open('Relatório - Usuários Inativos.txt', 'w')
             for nome in inativos:
-                arquivo.write('Usuário: '+nome+' '+'Nível de Acesso: '++'\n')
+                arquivo.write('Usuário: '+nome+' '+'Nível de Acesso: '+str(usuarios[nome][2])+'\n')
             arquivo.close()
-            '''
         elif comando == 10:
             if len(pedido) == 0:
                 print("Quantidade de produtos insuficiente.")
@@ -290,15 +290,29 @@ while login == True:
             arquivo.close()
             print("Pedido confimado com sucesso!")
             print("Salvo no arquivo {}".format(relatorio))
+        elif comando == 11:
+            if usuarios[email][2] < 2:
+                continue
+            nomeUsuario = input("Informe o nome do usuário desejado: ")
+            buscaUsuario = Usuarios.buscaUsuario(usuarios, nomeUsuario)
+            for nome in buscaUsuario:
+                if nomeUsuario != nome:
+                    print("Nome inválido, tente novamente.")
+                    nomeUsuario = input("Informe o nome do usuário desejado: ")
+                    buscaUsuario = Usuarios.buscaUsuario(usuarios, nomeUsuario)
+                print("Usuário pesquisado:\n")
+        elif comando == 12:
+            precoMaximo = float(input("Informe o valor máximo do produto desejado: "))
+            buscaProduto = Elementos.buscaProdutos(cardapio, precoMaximo)
+            while len(buscaProduto) == 0:
+                print("Nenhum produto encontrado, tente novamente.")
+                precoMaximo = float(input("Informe o valor máximo do produto desejado: "))
+                buscaProduto = Elementos.buscaProdutos(cardapio, precoMaximo)
+            print("Produtos Disponíveis:\n", buscaProduto)
         elif comando == 0:
             Criptografia.criptografarUsuarios(usuarios)
             Criptografia.criptografarElementos(cardapio)
             login = False 
         else:
             print("Erro! Tente novamente.")
-        elif comando == 11:
-            if usuarios[email][2] < 2:
-                continue
-            pass
-        elif comando == 12:
-            pass
+        

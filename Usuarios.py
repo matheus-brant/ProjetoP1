@@ -8,8 +8,8 @@ import datetime
 
 def buscaUsuario(usuarios, nome):
     resultados = []
-    for nome in usuarios:
-        if usuarios[nome][0] <= nome:
+    for n in usuarios:
+        if usuarios[n][0] == nome:
             resultados.append(nome)
     resultados.sort()
     return resultados
