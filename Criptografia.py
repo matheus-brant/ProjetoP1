@@ -1,8 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jun  9 15:49:14 2018
+Universidade Federal de Pernambuco (UFPE) (http://www.ufpe.br)
+Centro de Informática (CIn) (http://www.cin.ufpe.br)
+Projeto Programação 1
+Graduando em Sistemas de Informação
+IF968 - Programação 1
 
-@author: mrbn
+Autor: Matheus Ribeiro Brant Nobre (mrbn)
+Email: mrbn@cin.ufpe.br
+Data: 2018-06-13
+Copyright(c) 2018 Matheus Ribeiro Brant Nobre
+"""
+
+"""
+Funcionalidade do Script: Esse scirpt contém as funções de criptografia e
+descriptografia das informações dos usuários e elementos. 
 """
 
 def lerChave(address):
@@ -23,6 +35,11 @@ def lerChave(address):
     return n1, n2
 
 def criptografarString(string):
+    '''
+    Percorre o arquivo passado como parâmetro na função lerChave, incrementando
+    os caracteres diferentes de espaço nas variáveis indicadas com a fórmula de
+    criptografia solicitada no detalhamento do projeto.
+    '''
     e, n = lerChave('chavePublica.txt')
     cod = ''
     for x in string:
@@ -31,6 +48,11 @@ def criptografarString(string):
     return cod
 
 def decifrarString(cod):
+    '''
+    Percorre o arquivo passado como parâmetro na função lerChave, incrementando
+    os caracteres diferentes de '?' nas variáveis indicadas com a fórmula de
+    descriptografia solicitada no detalhamento do projeto.
+    '''
     d, n = lerChave('chavePrivada.txt')
     y = ''
     frase = ''
@@ -43,6 +65,12 @@ def decifrarString(cod):
     return frase
 
 def criptografarUsuarios(dicionario):
+    '''
+    Abre o arquivo txt no modo escrita e escreve cada elemento da tupla
+    correspondente aos dados dos usuários (no dicionário usuários definido no 
+    script principal) e usa a função de criptografarString para criptografar
+    cada elemento de acordo com seu índice.
+    '''
     arquivo = open('usuarios.txt', 'w')
     for nome in dicionario:
         arquivo.write(criptografarString(nome))
@@ -58,6 +86,10 @@ def criptografarUsuarios(dicionario):
     arquivo.close()
 
 def decifrarUsuarios(dicionario):
+    '''
+    Abre o arquivo txt no modo leitura e lê cada linha do arquivo, usando a
+    função decifrar string em cada elemento definido.
+    '''
     arquivo = open('usuarios.txt', 'r')
     linha = arquivo.readline()
     while linha != '':
@@ -75,6 +107,12 @@ def decifrarUsuarios(dicionario):
         linha = arquivo.readline()
         
 def criptografarElementos(cardapio):
+    '''
+    Abre o arquivo txt no modo escrita e escreve cada elemento da tupla
+    correspondente aos dados dos elementos (no dicionário cardapio definido no 
+    script principal) e usa a função de criptografarString para criptografar
+    cada elemento de acordo com seu índice.
+    '''
     arquivo = open('elementos.txt', 'w')
     for nome in cardapio:
         arquivo.write(criptografarString(nome))
@@ -90,6 +128,10 @@ def criptografarElementos(cardapio):
     arquivo.close()
     
 def decifrarElementos(cardapio):
+    '''
+    Abre o arquivo txt no modo leitura e lê cada linha do arquivo, usando a
+    função decifrar string em cada elemento definido.
+    '''
     arquivo = open('elementos.txt', 'r')
     linha = arquivo.readline()
     while linha != '':

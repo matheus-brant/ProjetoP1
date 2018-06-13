@@ -1,8 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Jun  9 15:48:40 2018
+Universidade Federal de Pernambuco (UFPE) (http://www.ufpe.br)
+Centro de Informática (CIn) (http://www.cin.ufpe.br)
+Projeto Programação 1
+Graduando em Sistemas de Informação
+IF968 - Programação 1
 
-@author: mrbn
+Autor: Matheus Ribeiro Brant Nobre (mrbn)
+Email: mrbn@cin.ufpe.br
+Data: 2018-06-13
+Copyright(c) 2018 Matheus Ribeiro Brant Nobre
+"""
+
+"""
+Funcionalidade do Script: Esse scirpt contém o código principal do programa, 
+responsável pelas funcionalidades operacionais (Login e logout; Menu de 
+operações; cadastro, remoção, alteração, nível de acesso, ativação e
+desativação de informações). 
 """
 
 import Criptografia
