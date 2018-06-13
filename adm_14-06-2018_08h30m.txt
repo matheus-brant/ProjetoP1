@@ -1,0 +1,6 @@
+Nome do cliente: Administrador
+14-06-2018 08h30m
+50 x coxinha = R$ 75.0
+50 x brigadeiro = R$ 25.0
+
+Total: R$ 100.0

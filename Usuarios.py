@@ -8,7 +8,6 @@ IF968 - Programação 1
 
 Autor: Matheus Ribeiro Brant Nobre (mrbn)
 Email: mrbn@cin.ufpe.br
-Data: 2018-06-13
 Copyright(c) 2018 Matheus Ribeiro Brant Nobre
 """
 
@@ -68,7 +67,7 @@ def logAct(usuario, acao):
     '''
     arquivo = open('log.txt', 'a')
     agora = datetime.datetime.now()
-    arquivo.write('{}: {} às {} {}\n.'.format(usuario, acao, str(agora.time()), str(agora.date())))
+    arquivo.write('{}: {} às {} {}.\n'.format(usuario, acao, str(agora.time()), str(agora.date())))
     arquivo.close()
     
 def recuperaUsuario(linha):
@@ -97,7 +96,12 @@ def recuperaData(linha):
     return data
 
 def lerLogUsuario(usuario):
-    
+    '''
+    Abre o arquivo txt no modo leitura e enquanto a linha for diferente de uma
+    string vazia se a linha, passada como parâmetro na função recuperaUsuario
+    for igual ao desejado, ele será acrescentado ao final da lista acoes e assim
+    sucessivamente. Ao final a função retorna a lista.
+    '''
     arquivo = open('log.txt', 'r')
     acao = arquivo.readline()
     acoes = []
@@ -108,6 +112,12 @@ def lerLogUsuario(usuario):
     return acoes
 
 def lerLogData(data):
+    '''
+    Abre o arquivo txt no modo leitura e enquanto a linha for diferente de uma
+    string vazia se a linha, passada como parâmetro na função recuperaData for
+    igual ao desejado, ele será acrescentado ao final da lista acoes e assim
+    sucessivamente. Ao final a função retorna a lista.
+    '''
     arquivo = open('log.txt', 'r')
     acao = arquivo.readline()
     acoes = []

@@ -1,0 +1,7 @@
+Nome do cliente: Administrador
+13-06-2018 23h59m
+100 x coxinha = R$ 150.0
+0 x coxinha = R$ 0.0
+30 x Pastel de Festa = R$ 15.0
+
+Total: R$ 165.0

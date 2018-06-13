@@ -1,2 +1,2 @@
-mrbn: login às 18:07:49.008480 2018-06-10.
-apln2: cancelamento de pedido às 18:12:26.053680 2018-06-10.
+mrbn: logout às 17:31:33.522814 2018-06-13.
+mrbn: logout às 17:31:34.115621 2018-06-13.

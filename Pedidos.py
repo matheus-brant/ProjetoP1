@@ -8,7 +8,6 @@ IF968 - Programação 1
 
 Autor: Matheus Ribeiro Brant Nobre (mrbn)
 Email: mrbn@cin.ufpe.br
-Data: 2018-06-13
 Copyright(c) 2018 Matheus Ribeiro Brant Nobre
 """
 
